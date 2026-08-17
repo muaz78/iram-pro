@@ -1,0 +1,516 @@
+/* =========================================================
+   ROMANTIC PROPOSAL FOR IRAM — VANILLA CSS STYLING
+   ========================================================= */
+
+:root {
+  --bg-warm: #faf6f4;
+  --text-main: #2d2327;
+  --text-muted: #6b555d;
+  --rose-primary: #ec407a;
+  --rose-soft: #f48fb1;
+  --rose-deep: #771933;
+  --glass-bg: rgba(255, 255, 255, 0.76);
+  --glass-border: rgba(255, 255, 255, 0.92);
+  --glass-shadow: 0 16px 40px -12px rgba(220, 160, 175, 0.25);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-script: 'Great Vibes', cursive;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-warm);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Background Canvas */
+#petals-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Corner Botanical Graphics */
+.corner-decorations {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.floral-corner {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  opacity: 0.45;
+}
+
+.floral-corner.top-left {
+  top: -30px;
+  left: -30px;
+  transform: rotate(15deg);
+}
+
+.floral-corner.bottom-right {
+  bottom: -30px;
+  right: -30px;
+  transform: rotate(195deg);
+}
+
+.ambient-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.glow-1 {
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(255, 213, 225, 0.35) 0%, transparent 70%);
+}
+
+.glow-2 {
+  bottom: 10%;
+  right: 10%;
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(255, 235, 240, 0.45) 0%, transparent 70%);
+}
+
+/* Floating Music Button */
+.music-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 16px rgba(220, 160, 175, 0.2);
+  border-radius: 9999px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #7a4c58;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.music-toggle:hover {
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--rose-deep);
+}
+
+.music-bars {
+  display: none;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+}
+
+.music-toggle.playing .music-bars {
+  display: flex;
+}
+
+.music-bars span {
+  width: 2px;
+  background: var(--rose-primary);
+  border-radius: 2px;
+  animation: barPulse 1s ease-in-out infinite alternate;
+}
+
+.music-bars span:nth-child(2) { animation-delay: 0.2s; }
+.music-bars span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes barPulse {
+  0% { height: 3px; }
+  100% { height: 12px; }
+}
+
+/* Main Container */
+.main-wrapper {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 600px;
+  padding: 24px 16px;
+  margin: auto;
+}
+
+/* Glass Card */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 28px;
+  padding: 44px 32px;
+  position: relative;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Stages */
+.stage {
+  display: none;
+  opacity: 0;
+  transform: translateY(16px) scale(0.97);
+  filter: blur(6px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.7s ease;
+}
+
+.stage.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0px);
+}
+
+/* Typography & Badges */
+.heart-badge {
+  width: 44px;
+  height: 44px;
+  background: #fff0f3;
+  color: var(--rose-primary);
+  border: 1px solid #fce4ec;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(244, 143, 177, 0.2);
+}
+
+.heart-badge.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+
+.tagline {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.32em;
+  color: #ab7a88;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.heading-serif {
+  font-family: var(--font-serif);
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 1.15;
+  color: #2b1f24;
+}
+
+.subtitle-serif {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-style: italic;
+  color: #614951;
+  margin-top: 12px;
+}
+
+.script-iram {
+  font-family: var(--font-script);
+  font-size: 42px;
+  color: #882442;
+}
+
+.description-text {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 24px auto 32px;
+  max-width: 380px;
+}
+
+.accent-heart {
+  color: var(--rose-primary);
+}
+
+/* Primary Button */
+.btn-primary, .btn-yes {
+  background: linear-gradient(135deg, #f48fb1, #f06292, #ec407a);
+  color: white;
+  border: none;
+  border-radius: 9999px;
+  padding: 14px 34px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 10px 28px rgba(240, 98, 146, 0.35);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-primary:hover, .btn-yes:hover {
+  transform: scale(1.04);
+  box-shadow: 0 14px 36px rgba(240, 98, 146, 0.48);
+}
+
+.btn-primary:active, .btn-yes:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  background: #fae5eb;
+  color: var(--rose-deep);
+  border: 1px solid #f8bbd0;
+  border-radius: 9999px;
+  padding: 12px 28px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: #f8d4de;
+  transform: scale(1.02);
+}
+
+/* Handwriting Stage */
+.handwriting-container {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  height: 150px;
+  margin: 10px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#handwriting-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 2px 10px rgba(216, 112, 147, 0.35));
+}
+
+.draw-path {
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  transition: stroke-dashoffset 1s ease;
+}
+
+.draw-path.drawn {
+  stroke-dashoffset: 0;
+}
+
+.pen-cursor {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--rose-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 12px var(--rose-primary), 0 0 20px var(--rose-soft);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.hidden-reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: all 0.8s ease;
+  pointer-events: none;
+}
+
+.hidden-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Narrative Fade-Up Lines */
+.narrative-lines, .proposal-lines {
+  margin: 20px auto;
+  max-width: 440px;
+}
+
+.fade-line {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--delay, 0s);
+  margin-bottom: 16px;
+  font-size: 15px;
+  color: #4a3b40;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.main-glow-line p {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--rose-deep);
+  text-shadow: 0 2px 14px rgba(244, 143, 177, 0.4);
+}
+
+.statement-box h2 {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  color: #311f26;
+}
+
+.climax-heading {
+  font-family: var(--font-serif);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--rose-deep);
+  text-shadow: 0 2px 16px rgba(244, 143, 177, 0.45);
+}
+
+/* Buttons Container & Playful Escaping Button */
+.buttons-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 32px;
+  min-height: 80px;
+}
+
+.playful-wrapper {
+  position: relative;
+}
+
+.btn-playful {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 14px rgba(240, 160, 180, 0.2);
+  color: #735059;
+  border-radius: 9999px;
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: pre-line;
+  max-width: 220px;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(58, 40, 46, 0.3);
+  backdrop-filter: blur(8px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  transition: opacity 0.4s ease;
+}
+
+.modal-overlay.hidden {
+  display: none;
+}
+
+.modal-card {
+  background: #fffdfb;
+  border-radius: 24px;
+  padding: 36px 28px;
+  width: 100%;
+  max-width: 540px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  border: 1px solid #fce4ec;
+  position: relative;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #8c5061;
+  cursor: pointer;
+}
+
+.letter-body {
+  background: #fff9fa;
+  border: 1px solid #fce4ec;
+  border-radius: 16px;
+  padding: 20px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #4a3b40;
+}
+
+.letter-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #fce4ec;
+  padding-top: 12px;
+  font-size: 12px;
+  color: #a07a84;
+}
+
+.footer-quote {
+  font-size: 13px;
+  color: #8c6d77;
+  font-style: italic;
+  border-top: 1px solid rgba(248, 187, 208, 0.5);
+  padding-top: 20px;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .heading-serif { font-size: 32px; }
+  .climax-heading { font-size: 28px; }
+  .glass-card { padding: 32px 20px; border-radius: 22px; }
+  .buttons-container { flex-direction: column; gap: 12px; }
+}

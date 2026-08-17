@@ -1,0 +1,7 @@
+{
+  "name": "Romantic Proposal for Iram",
+  "description": "An elegant, cinematic, and personal romantic proposal web experience handcrafted for Iram with custom handwriting animation, emotional storytelling, and interactive playful moments.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

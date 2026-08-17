@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>For Iram ♡ — A Special Message</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient Petals & Particles Canvas -->
+  <canvas id="petals-canvas" aria-hidden="true"></canvas>
+
+  <!-- Corner Botanical Line Art -->
+  <div class="corner-decorations" aria-hidden="true">
+    <svg class="floral-corner top-left" viewBox="0 0 200 200" fill="none">
+      <path d="M20 20 Q70 60 120 140 Q150 180 180 190" stroke="#e8b5c2" stroke-width="1.2" stroke-linecap="round"/>
+      <path d="M50 45 C40 25 65 20 70 38 C75 55 55 58 50 45 Z" fill="#fce4ec" stroke="#e8b5c2" stroke-width="0.8"/>
+      <path d="M80 80 C65 65 90 55 98 72 C104 88 88 92 80 80 Z" fill="#fce4ec" stroke="#e8b5c2" stroke-width="0.8"/>
+      <circle cx="150" cy="165" r="14" fill="#fae1e7" stroke="#e8b5c2" stroke-width="0.8"/>
+    </svg>
+    <svg class="floral-corner bottom-right" viewBox="0 0 200 200" fill="none">
+      <path d="M20 20 Q70 60 120 140 Q150 180 180 190" stroke="#e8b5c2" stroke-width="1.2" stroke-linecap="round"/>
+      <path d="M50 45 C40 25 65 20 70 38 C75 55 55 58 50 45 Z" fill="#fce4ec" stroke="#e8b5c2" stroke-width="0.8"/>
+      <circle cx="155" cy="170" r="16" fill="#fae1e7" stroke="#e8b5c2" stroke-width="0.8"/>
+    </svg>
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+  </div>
+
+  <!-- Music Toggle Floating Button -->
+  <button id="music-btn" class="music-toggle" aria-label="Toggle romantic music">
+    <span class="music-icon">♪</span>
+    <span class="music-text">Music</span>
+    <div class="music-bars" id="music-bars">
+      <span></span><span></span><span></span>
+    </div>
+  </button>
+
+  <!-- Audio Element with Graceful Fallback -->
+  <audio id="bg-audio" loop preload="none">
+    <source src="assets/music/romantic.mp3" type="audio/mp3">
+  </audio>
+
+  <!-- Main Multi-Stage Interactive Container -->
+  <main class="main-wrapper">
+    <!-- STAGE 1: LANDING -->
+    <section id="stage-1" class="stage active">
+      <div class="glass-card text-center">
+        <div class="heart-badge">♡</div>
+        <h1 class="heading-serif">Hey, Iram <span class="accent-heart">♡</span></h1>
+        <p class="subtitle-serif">"Tumhare liye kuch banaya hai..."</p>
+        <div class="description-text">
+          <p>Bas 2 minute chahiye...</p>
+          <p>phir jo tumhara dil kahe, woh keh dena.</p>
+        </div>
+        <button id="btn-open" class="btn-primary">
+          <span>Open it ♡</span>
+          <span class="arrow">→</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- STAGE 2: HANDWRITING REVEAL -->
+    <section id="stage-2" class="stage">
+      <div class="glass-card text-center">
+        <div class="tagline">— KHAS TUMHARE LIYE —</div>
+        <div class="handwriting-container">
+          <div class="ambient-glow-handwriting"></div>
+          <svg id="handwriting-svg" viewBox="0 0 420 160" fill="none">
+            <!-- I -->
+            <path id="stroke-I" class="draw-path" d="M 45 65 C 65 30 100 20 120 28 C 132 34 118 55 90 70 C 65 85 62 110 74 135 C 80 148 95 150 110 142" stroke="#542e38" stroke-width="4.5" stroke-linecap="round"/>
+            <path id="stroke-I-top" class="draw-path" d="M 75 35 C 95 24 125 24 135 38" stroke="#703646" stroke-width="3.2" stroke-linecap="round"/>
+            <!-- r -->
+            <path id="stroke-r" class="draw-path" d="M 125 125 C 135 110 142 85 155 75 C 165 68 180 72 178 86 C 176 102 172 120 185 125" stroke="#542e38" stroke-width="4" stroke-linecap="round"/>
+            <!-- a -->
+            <path id="stroke-a" class="draw-path" d="M 230 85 C 215 72 195 80 190 98 C 185 118 200 130 220 125 C 235 120 238 100 238 78 C 238 98 236 118 248 126" stroke="#542e38" stroke-width="4" stroke-linecap="round"/>
+            <!-- m -->
+            <path id="stroke-m" class="draw-path" d="M 252 125 C 258 105 264 82 278 78 C 290 75 295 90 295 124 C 302 100 312 78 326 78 C 340 78 344 95 342 125" stroke="#542e38" stroke-width="4" stroke-linecap="round"/>
+            <!-- Flourish -->
+            <path id="stroke-flourish" class="draw-path" d="M 342 125 C 360 135 385 132 398 120 C 410 110 395 95 380 105 C 330 148 150 162 55 138" stroke="#c76d85" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- Heart Dot -->
+            <path id="stroke-dot" class="draw-path" d="M 390 102 C 390 98 394 94 398 94 C 402 94 406 98 406 102 C 406 108 398 114 398 114 C 398 114 390 108 390 102 Z" fill="#e91e63"/>
+          </svg>
+          <div id="pen-cursor" class="pen-cursor"></div>
+          <div id="handwriting-name-fallback" class="script-iram">Iram ♡</div>
+        </div>
+        <div id="stage-2-reveal" class="hidden-reveal">
+          <p class="subtitle-serif">"Tumhare liye kuch bohot khaas banaya hai..."</p>
+          <button id="btn-start" class="btn-primary mt-6">
+            <span>Chalo, shuru karte hain ♡</span>
+            <span class="arrow">→</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STAGE 3: EMOTIONAL BUILD-UP -->
+    <section id="stage-3" class="stage">
+      <div class="glass-card text-center">
+        <div class="tagline">— IRAM, EK BAAT KEHNI THI —</div>
+        <div class="narrative-lines">
+          <p class="fade-line" style="--delay: 0.3s">"Pata nahi tumhe kabhi ehsaas hua ya nahi..."</p>
+          <p class="fade-line" style="--delay: 1.3s">Lekin tumhari presence ne meri life mein ek alag si jagah bana li hai.</p>
+          <p class="fade-line" style="--delay: 2.3s">Tumse baat karna, tumhari chhoti-chhoti baatein notice karna...</p>
+          <p class="fade-line" style="--delay: 3.3s">Pata hi nahi chala kab ye sab mere liye itna special ho gaya.</p>
+          <div class="fade-line main-glow-line" style="--delay: 4.4s">
+            <p>Shayad isi ko kisi ko pasand karna kehte hain. ♡</p>
+          </div>
+        </div>
+        <div class="fade-line mt-8" style="--delay: 5.3s">
+          <button id="btn-to-proposal" class="btn-primary">
+            <span>Ek aur baat hai</span>
+            <span class="arrow">→</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STAGE 4: PROPOSAL -->
+    <section id="stage-4" class="stage">
+      <div class="glass-card text-center">
+        <div class="tagline">— AUR AB... EK SAWAAL —</div>
+        <div class="proposal-lines">
+          <div class="script-iram text-4xl">Iram...</div>
+          <p class="fade-line" style="--delay: 0.6s">Mujhe nahi pata tumhara jawab kya hoga...</p>
+          <p class="fade-line" style="--delay: 1.3s">Lekin main ye baat dil mein rakhna nahi chahta.</p>
+          <div class="fade-line statement-box" style="--delay: 2.1s">
+            <h2 class="heading-bold">Mujhe tum pasand ho.</h2>
+            <p class="subtitle-serif italic">Sach mein. ♡</p>
+          </div>
+          <p class="fade-line" style="--delay: 3.0s">Aur agar tum bhi mujhe ek mauka dena chahti ho...</p>
+          <p class="fade-line" style="--delay: 3.7s">toh kya tum mere saath ye kahani shuru karogi?</p>
+          <div class="fade-line climax-box" style="--delay: 4.5s">
+            <h1 class="climax-heading">Iram, will you be mine? ♡</h1>
+          </div>
+        </div>
+        <div class="buttons-container fade-line" style="--delay: 5.2s">
+          <button id="btn-yes" class="btn-yes">
+            <span class="heart-pulse">♡</span>
+            <span>Haan ♡</span>
+          </button>
+          <div class="playful-wrapper">
+            <button id="btn-playful" class="btn-playful">Sochne do 🙈</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STAGE 5: HAPPY ENDING -->
+    <section id="stage-5" class="stage">
+      <div class="glass-card text-center">
+        <div class="heart-badge pulse">♡</div>
+        <div class="script-iram text-4xl mb-2">Iram... ♡</div>
+        <h2 class="subtitle-serif text-2xl">"Toh phir..."</h2>
+        <h1 class="climax-heading mt-2">Hamari kahani yahin se shuru hoti hai.</h1>
+        <p class="thankyou-text mt-4">Thank you for saying yes. 🌸</p>
+        <p class="subtitle-serif text-sm mt-1 italic">"Ab dekhte hain ye kahani humein kahan le jaati hai..."</p>
+        <button id="btn-memory-open" class="btn-secondary mt-8">
+          <span>Ek chhoti si aur cheez hai</span>
+          <span>→</span>
+        </button>
+        <div class="footer-quote mt-8">
+          <p>Made with a little courage,</p>
+          <p>a lot of feelings,</p>
+          <p>and way too much effort. ♡</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- SPECIAL MEMORY / LOVE LETTER MODAL -->
+  <div id="memory-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <button id="btn-modal-close" class="modal-close-btn" aria-label="Close">✕</button>
+      <div class="tagline text-center">— EK CHHOTI SI AUR KAHANI —</div>
+      <h3 class="heading-serif text-center text-2xl mt-1">A Letter for Iram ♡</h3>
+      <div class="letter-body mt-4">
+        <p class="script-iram text-2xl">Dear Iram,</p>
+        <p class="mt-2">Kaha tha na maine... kuch baatein bas dil mein nahi rakhi jaati. Har chhoti baat jo tum karti ho, jis tarah se tum baat karti ho, woh sab kuch dil ko bohot sukoon deta hai.</p>
+        <p class="mt-3">Ye website sirf ek sawaal nahi thi, balki meri feelings ko sabse khoobsurat tareeqe se tum tak pahunchane ki ek koshish thi. Thank you for being such a special part of my life.</p>
+        <div class="letter-footer mt-6">
+          <span>For today & always</span>
+          <span class="script-iram text-lg">Forever yours ♡</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
